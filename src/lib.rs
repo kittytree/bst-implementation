@@ -29,14 +29,6 @@ impl fmt::Display for Node {
         write!(f, "{},", self.value)
     }
 }
-/*
-impl PartialEq for Node{
-    // for deletion checking on children on Node with == or !=
-    fn eq(&self, other: &Self) -> bool {
-
-    }
-}
- */
 
 pub struct Tree {
     root: Option<Box<Node>>,
@@ -91,7 +83,52 @@ impl Tree {
     }
 
     pub fn deletion(&mut self, to_delete_value: u32) {
-        println!("unlucky not deleting {}", to_delete_value);
+        //base case
+        match &mut self.root {
+            None => {
+                println!("The tree is empty, nothing to delete");
+                return;
+            },
+            Some (root) => {
+                Tree::deletion_recursive(root, to_delete_value, root.value);
+            }
+        }
+    }
+
+    fn deletion_recursive(node: &mut Box<Node> , to_delete_value: u32, root_value: u32){
+        println!("so far works with root {0}, {1}", node.value, to_delete_value);
+        if node.value < to_delete_value {
+            match &mut node.right {
+                None => {
+                    println!("Value doesn't exist");
+                    return;
+                },
+                Some (right_child) => {
+                    Tree::deletion_recursive(right_child, to_delete_value, root_value);
+                }
+            }
+        }else if node.value > to_delete_value {
+            match &mut node.left {
+                None => {
+                    println!("Value doesn't exist");
+                    return;
+                },
+                Some (left_child) => {
+                    Tree::deletion_recursive(left_child, to_delete_value, root_value);
+                }
+            }
+        }else{
+            println!("Lets delete {0}, as it matches {1}", node, to_delete_value);
+            if root_value < to_delete_value {
+                println!("right of root find maximum");
+            }else if root_value > to_delete_value {
+                println!("left of root find maximum");
+                return;
+            }else{
+                println!("we are the root. either max or min");
+                return;
+            }
+        }
     }
 
     pub fn to_string(&mut self) {
@@ -134,8 +171,9 @@ impl Tree {
     }
 }
 
-pub fn choose_integer_to_add() -> u32 {
+pub fn choose_number(mode: &str) -> u32 {
     loop {
+        println!("Please choose a number to {}:", mode);
         let mut int_to_add: String = String::new();
 
         io::stdin()
