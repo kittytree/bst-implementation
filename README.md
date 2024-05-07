@@ -1,6 +1,6 @@
 # bst-implementation
 
-Practicing on this then will do red/black if I feel the need to practice rust more before a real project.
+Practicing on this to learn Rust.
 
 Focusing on this then will worry aobut red/black, need to figure out lifetime on rust before I can continue red/black.
 Also thought seperating the two will be best to make it clean.
@@ -11,3 +11,5 @@ I think I know what I want to do for a first project, even two projects, but I t
 
 I was sent this when I asked for help on resources / pointers on where I went wrong in my thinking. Apparently writing linked-nodes in rust safely can be "not easy" compared to other languages so I feel less emberassed by the time taken
 to learn rust so far. Linked: https://rust-unofficial.github.io/too-many-lists/
+
+Edit 2024-05-06: Feature complete for now, maybe in the future I'll tackle the deletion problem again, but I've learnt a ton of rust basics which is what this project was always about. I'll leave it up to showcase my learning, and to have something with rust on my github. Working on https://github.com/kittytree/image_rak now.
