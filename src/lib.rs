@@ -52,7 +52,6 @@ impl Tree {
     }
 
     fn insert_recursive(node: &mut Box<Node>, value: u32) {
-        //node.right = Some(Box::new(Node::new_node(value)))
         if value < node.value {
             match &mut node.left {
                 None => {
@@ -82,67 +81,14 @@ impl Tree {
         }
     }
 
-    pub fn deletion(&mut self, to_delete_value: u32) {
-        //base case
-        match &mut self.root {
-            None => {
-                println!("The tree is empty, nothing to delete");
-                return;
-            },
-            Some (root) => {
-                Tree::deletion_recursive(root, to_delete_value, root.value);
-            }
-        }
-    }
-
-    fn deletion_recursive(node: &mut Box<Node> , to_delete_value: u32, root_value: u32){
-        println!("so far works with root {0}, {1}", node.value, to_delete_value);
-        if node.value < to_delete_value {
-            match &mut node.right {
-                None => {
-                    println!("Value doesn't exist");
-                    return;
-                },
-                Some (right_child) => {
-                    Tree::deletion_recursive(right_child, to_delete_value, root_value);
-                }
-            }
-        }else if node.value > to_delete_value {
-            match &mut node.left {
-                None => {
-                    println!("Value doesn't exist");
-                    return;
-                },
-                Some (left_child) => {
-                    Tree::deletion_recursive(left_child, to_delete_value, root_value);
-                }
-            }
-        }else{
-            println!("Lets delete {0}, as it matches {1}", node, to_delete_value);
-            if root_value < to_delete_value {
-                println!("right of root find maximum");
-            }else if root_value > to_delete_value {
-                println!("left of root find maximum");
-                return;
-            }else{
-                println!("we are the root. either max or min");
-                return;
-            }
-        }
-    }
-
     pub fn to_string(&mut self) {
-        //print!("{0}", self.root.as_mut().unwrap());
         println!("In Order output:");
         match &mut self.root {
             None => {
-                // why did i do this last night? Re-Check logic when refactoring on 0 node case
-                //println!("{0}", self.root.as_mut().unwrap());
                 println!("Empty tree");
                 return;
             }
             Some(node) => {
-                // sanity check root print
                 println!("The root is: {0}", node.value);
                 Tree::to_string_recursive(node);
             }
@@ -193,9 +139,8 @@ pub fn user_mode_chooser() -> u32 {
     loop {
         println!("Please select one of the following modes by entering the number that corresponds to the possible option.");
         println!("1: Insert a specific number into the tree.");
-        println!("2: To delete a specific number in the tree.");
-        println!("3: To print the contents of the tree in increasing order.");
-        println!("4: To exit the program.");
+        println!("2: To print the contents of the tree in increasing order.");
+        println!("3: To exit the program.");
         let mut decision: String = String::new();
 
         io::stdin()
@@ -210,7 +155,6 @@ pub fn user_mode_chooser() -> u32 {
             1 => return 1,
             2 => return 2,
             3 => return 3,
-            4 => return 4,
             _ => println!("Number out of bounds of possible decisions"),
         }
     }

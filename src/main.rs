@@ -21,27 +21,20 @@ fn main() {
             Err(_) => continue,
         };
 
-        // initialize the bst tree then insert into the tree number nodes
         let mut binary_tree = Tree::new_tree();
 
         let mut n = 0;
 
         while n < number_nodes_to_add {
             let rand_num = rand::thread_rng().gen_range(1..=10000);
-            // dont pass the tree just use the self run tree
             binary_tree.insert(rand_num);
-            //println!("{0} inserted into the tree", rand_num);
             n += 1;
         }
 
-        // print the tree here to check insert function
-
-        // start decision chooser
         loop {
             match user_mode_chooser() {
                 1 => binary_tree.insert(choose_number("insert")),
-                2 => binary_tree.deletion(choose_number("delete")),
-                3 => binary_tree.to_string(),
+                2 => binary_tree.to_string(),
                 _ => process::exit(0x0100),
             }
         }
